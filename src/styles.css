@@ -1,1 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+/* side container design */
+.side-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 20%;
+    background-color: rgba(210, 210, 201, 0.974);
+    align-items: flex-start;
+}
+.side-container-content {
+    background: rgba(78, 72, 50, 0.813);
+    margin: 10px;
+
+}
+/* End of side container design */
+
+/* main container design */
+.container-1 {
+    display: flex;
+    flex-wrap: column;
+    flex-wrap: wrap;
+    flex-direction: row;
+    position: absolute;
+    margin: 0;
+    width: 100%;
+    max-height: auto;
+    min-height: 100%;
+    background: rgba(210, 210, 201, 0.911);
+}
+
+
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}

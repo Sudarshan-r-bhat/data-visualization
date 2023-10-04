@@ -1,0 +1,24 @@
+<html>
+    <body>
+       <div class="container-1">
+            <div class="side-container">
+                <div class="side-container-content">
+                    <button mat-button (click)="toggleView('barchart')" type="button">BarChart</button>
+                </div>
+                <div class="side-container-content">
+                    <button mat-button (click)="toggleView('tidytree')" type="button">Tidy tree</button>
+                </div>
+            </div>
+            <div class="main-container">
+                <div *ngIf="isBarChart">
+                    <h1>Barchart layout </h1>
+                    <app-bar-chart></app-bar-chart>
+                </div>
+                <div *ngIf="isTidyTree">
+                    <h1>Tidy tree layout </h1>
+                    <app-tidy-tree></app-tidy-tree>
+                </div>
+            </div>
+       </div>
+    </body>
+</html>
