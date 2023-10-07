@@ -39,12 +39,10 @@ export class TidyTreeComponent {
     const tree = d3.tree().size([viewBoxX, viewBoxY]);
     const hierarchy = d3.hierarchy(data);
     const rootNode = tree(hierarchy);
-    const links = rootNode.links();
+    const links = tree(hierarchy).links();
     const descendants = rootNode.descendants();
-    var linkPathGenerator = d3.linkHorizontal()
-      .x((d: any) => +(d.y))
-      .y((d: any) => +(d.x));
-    console.log(linkPathGenerator);
+    var linkPathGenerator = d3.linkHorizontal();
+    console.log('links', links, 'descendants', descendants);
     treeSvg.selectAll("path").data(links)
       .enter().append("path")
       // .join("path")
@@ -53,9 +51,10 @@ export class TidyTreeComponent {
       .attr("stroke-opacity", 0.6)
       .attr("stroke-width", 1.5)
       .attr("d", d => {
-        var source: [number, number] = [d.source.x, d.source.y];
-        var target: [number, number] = [d.target.x, d.target.y];
+        var source: [number, number] = [d.source.y, d.source.x];
+        var target: [number, number] = [d.target.y, d.target.x];
         var path = linkPathGenerator({source, target})
+        console.log(path);
         return path;
       })
       // .attr("d", d => `
@@ -73,7 +72,7 @@ export class TidyTreeComponent {
     treeSvg.selectAll("text").data(descendants).enter().append("text")
       .attr("x", d => d.y)
       .attr("y", d => d.x)
-      .text(d => { console.log(d.data); return (Object(d.data)) == undefined ? "n/a" : (Object(d.data)).name; })
+      .text(d => { return (Object(d.data)) == undefined ? "n/a" : (Object(d.data)).name; })
       .attr("fill", "white");
 
   }
