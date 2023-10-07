@@ -16,13 +16,16 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { ScatterPlotComponent } from './scatter-plot/scatter-plot.component';
+import { DataModule } from './data/data.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     TidyTreeComponent,
     MainPageComponent,
-    BarChartComponent
+    BarChartComponent,
+    ScatterPlotComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { BarChartComponent } from './bar-chart/bar-chart.component';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    DataModule
   ],
   providers: [],
   bootstrap: [AppComponent]

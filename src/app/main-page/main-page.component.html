@@ -3,10 +3,13 @@
        <div class="container-1">
             <div class="side-container">
                 <div class="side-container-content">
-                    <button mat-button (click)="toggleView('barchart')" type="button">BarChart</button>
+                    <button mat-button (click)="toggleView(1)" type="button">BarChart</button>
                 </div>
                 <div class="side-container-content">
-                    <button mat-button (click)="toggleView('tidytree')" type="button">Tidy tree</button>
+                    <button mat-button (click)="toggleView(2)" type="button">Tidy tree</button>
+                </div>
+                <div class="side-container-content">
+                    <button mat-button (click)="toggleView(3)" type="button">ScatterPlot</button>
                 </div>
             </div>
             <div class="main-container">
@@ -17,6 +20,10 @@
                 <div *ngIf="isTidyTree">
                     <h1>Tidy tree layout </h1>
                     <app-tidy-tree></app-tidy-tree>
+                </div>
+                <div *ngIf="isScatterPlot">
+                    <h1>ScatterPlot layout </h1>
+                    <app-scatter-plot></app-scatter-plot>
                 </div>
             </div>
        </div>

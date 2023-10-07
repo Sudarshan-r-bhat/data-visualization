@@ -8,6 +8,7 @@ import { Component, } from '@angular/core';
 export class MainPageComponent {
   isBarChart: boolean =false;
   isTidyTree: boolean = false;
+  isScatterPlot: boolean = true;
 
   constructor() {}
 
@@ -15,20 +16,10 @@ export class MainPageComponent {
 
   }
 
-  public toggleView(view: string) {
-    switch(view) {
-      case 'barchart': 
-        this.isBarChart = true;
-        this.isTidyTree = false;
-        break;
-      case 'tidytree':
-          this.isBarChart = false;
-          this.isTidyTree = true;
-          break;
-      default:
-          this.isBarChart = true;
-          this.isTidyTree = true;
-    }
+  public toggleView(viewNumber: number) {
+    this.isBarChart = (1 === viewNumber);
+    this.isTidyTree = (2 === viewNumber);
+    this.isScatterPlot = (3 === viewNumber);
   }
 
 

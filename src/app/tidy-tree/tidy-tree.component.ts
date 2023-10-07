@@ -1,16 +1,17 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as d3 from 'd3';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { data } from './data';
+import { ComponentConstants } from '../data/component-constants';
 
 @Component({
   selector: 'app-tidy-tree',
   templateUrl: './tidy-tree.component.html',
-  styleUrls: ['./tidy-tree.component.css']
+  styleUrls: ['./tidy-tree.component.css'],
+  providers: [ComponentConstants]
 })
 export class TidyTreeComponent {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private constants: ComponentConstants) { }
 
   @ViewChild("treeChart", { static: true }) treeChart!: ElementRef
   data: any = data;
@@ -22,11 +23,11 @@ export class TidyTreeComponent {
 
   // render functiont to generate a Tree structure for a given data
   private renderTree(data: any): void {
-    const windowScreenY = window.screen.height;
-    const windowScreenX = window.screen.width;
+    const windowScreenY = this.constants.screenHieght;
+    const windowScreenX = this.constants.screenWidth;
 
-    const viewBoxY = windowScreenY * 0.4;
-    const viewBoxX = windowScreenX * 0.4;
+    const viewBoxY = this.constants.getViewBoxHeight();
+    const viewBoxX = this.constants.getViewBoxWidth();
 
     const margin = { "top": viewBoxY * 0.1, "right": 10, "bottom": 10, "left": viewBoxX * 0.1 };
 

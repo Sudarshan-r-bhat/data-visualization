@@ -1,15 +1,22 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { barChartData } from './data';
+import { ComponentConstants } from '../data/component-constants';
 import * as d3 from 'd3';
 @Component({
   selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',
-  styleUrls: ['./bar-chart.component.css']
+  styleUrls: ['./bar-chart.component.css'],
+  providers: [ComponentConstants]
 })
 export class BarChartComponent {
+
   @ViewChild("barchart", { static: true }) barChart!: ElementRef;
   data: any;
   
+  constructor(private constants: ComponentConstants){
+
+  }
+
   ngOnInit() {
     this.data = barChartData;
     this.renderBarChart(this.data);
@@ -17,11 +24,11 @@ export class BarChartComponent {
 
   renderBarChart(data: any): void {
     console.log('data = ', data);
-    const windowScreenY = window.screen.height;
-    const windowScreenX = window.screen.width;
+    const windowScreenY = this.constants.screenHieght;
+    const windowScreenX = this.constants.screenWidth;
 
-    const viewBoxY = windowScreenY * 0.4;
-    const viewBoxX = windowScreenX * 0.4;
+    const viewBoxY = this.constants.getViewBoxHeight();
+    const viewBoxX = this.constants.getViewBoxWidth();
     const margin = { "top": viewBoxY * 0.1, "right": 10, "bottom": 10, "left": viewBoxX * 0.1 };
     var barChart = this.barChart.nativeElement;
     const barChartSvg = d3
