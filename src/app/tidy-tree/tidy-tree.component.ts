@@ -52,13 +52,19 @@ export class TidyTreeComponent {
       .attr("stroke", "black")
       .attr("stroke-opacity", 0.6)
       .attr("stroke-width", 1.5)
-      .attr("d", d => `
-          M${d.target.y},${d.target.x}
-          C${d.source.y},${d.target.x}
-           ${d.source.y},${d.source.x}
-           ${d.source.y},${d.source.x}
-           ${d.source.y},${d.target.x}
-        `);
+      .attr("d", d => {
+        var source: [number, number] = [d.source.x, d.source.y];
+        var target: [number, number] = [d.target.x, d.target.y];
+        var path = linkPathGenerator({source, target})
+        return path;
+      })
+      // .attr("d", d => `
+      //     M${d.target.y},${d.target.x}
+      //     C${d.source.y},${d.target.x}
+      //      ${d.source.y},${d.source.x}
+      //      ${d.source.y},${d.source.x}
+      //      ${d.source.y},${d.target.x}
+      //   `);
 
     treeSvg.selectAll('circle').data(descendants).enter().append("circle")
       .attr("cx", d => d.y)
