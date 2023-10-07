@@ -18,6 +18,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { ScatterPlotComponent } from './scatter-plot/scatter-plot.component';
 import { DataModule } from './data/data.module';
+import { LineGraphComponent } from './line-graph/line-graph.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DataModule } from './data/data.module';
     TidyTreeComponent,
     MainPageComponent,
     BarChartComponent,
-    ScatterPlotComponent
+    ScatterPlotComponent,
+    LineGraphComponent
   ],
   imports: [
     BrowserModule,

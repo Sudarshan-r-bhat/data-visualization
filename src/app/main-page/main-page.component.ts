@@ -8,8 +8,8 @@ import { Component, } from '@angular/core';
 export class MainPageComponent {
   isBarChart: boolean =false;
   isTidyTree: boolean = false;
-  isScatterPlot: boolean = true;
-
+  isScatterPlot: boolean = false;
+  isLineGraph: boolean = true;
   constructor() {}
 
   ngOnInit() {
@@ -20,6 +20,7 @@ export class MainPageComponent {
     this.isBarChart = (1 === viewNumber);
     this.isTidyTree = (2 === viewNumber);
     this.isScatterPlot = (3 === viewNumber);
+    this.isLineGraph = (4 === viewNumber);
   }
 
 

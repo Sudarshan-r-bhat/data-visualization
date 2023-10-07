@@ -11,6 +11,9 @@
                 <div class="side-container-content">
                     <button mat-button (click)="toggleView(3)" type="button">ScatterPlot</button>
                 </div>
+                <div class="side-container-content">
+                    <button mat-button (click)="toggleView(4)" type="button">LineGraph</button>
+                </div>
             </div>
             <div class="main-container">
                 <div *ngIf="isBarChart">
@@ -25,6 +28,12 @@
                     <h1>ScatterPlot layout </h1>
                     <app-scatter-plot></app-scatter-plot>
                 </div>
+
+                <div *ngIf="isLineGraph">
+                    <h1>Line graph layout </h1>
+                    <app-line-graph></app-line-graph>
+                </div>
+                
             </div>
        </div>
     </body>

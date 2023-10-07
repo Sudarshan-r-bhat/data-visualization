@@ -41,10 +41,9 @@ export class TidyTreeComponent {
     const rootNode = tree(hierarchy);
     const links = rootNode.links();
     const descendants = rootNode.descendants();
-    const linkPathGenerator = d3.linkHorizontal()
+    var linkPathGenerator = d3.linkHorizontal()
       .x((d: any) => +(d.y))
       .y((d: any) => +(d.x));
-
     console.log(linkPathGenerator);
     treeSvg.selectAll("path").data(links)
       .enter().append("path")
