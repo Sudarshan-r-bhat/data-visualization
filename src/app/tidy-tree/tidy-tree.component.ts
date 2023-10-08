@@ -76,6 +76,9 @@ export class TidyTreeComponent {
       .attr("cx", scaleX)
       .attr("cy", d => d.x)
       .attr("r", 10)
+      .on("click", (event, d) => {
+        console.log('click captured!');
+      })
       ;
     treeSvg.selectAll("text").data(descendants).enter().append("text")
       .attr("x", scaleX)
