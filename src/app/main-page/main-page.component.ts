@@ -7,10 +7,12 @@ import { Component, } from '@angular/core';
 })
 export class MainPageComponent {
   isBarChart: boolean =false;
-  isTidyTree: boolean = true;
+  isTidyTree: boolean = false;
   isScatterPlot: boolean = false;
   isLineGraph: boolean = false;
-  isRadialTree: boolean = true;
+  isRadialTree: boolean = false;
+  isPieChart: boolean = true;
+
   constructor() {}
 
   ngOnInit() {
