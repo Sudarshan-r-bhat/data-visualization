@@ -19,6 +19,7 @@ import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { ScatterPlotComponent } from './scatter-plot/scatter-plot.component';
 import { DataModule } from './data/data.module';
 import { LineGraphComponent } from './line-graph/line-graph.component';
+import { RadialTreeComponent } from './radial-tree/radial-tree.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LineGraphComponent } from './line-graph/line-graph.component';
     MainPageComponent,
     BarChartComponent,
     ScatterPlotComponent,
-    LineGraphComponent
+    LineGraphComponent,
+    RadialTreeComponent
   ],
   imports: [
     BrowserModule,
