@@ -14,6 +14,9 @@
                 <div class="side-container-content">
                     <button mat-button (click)="toggleView(4)" type="button">LineGraph</button>
                 </div>
+                <div class="side-container-content">
+                    <button mat-button (click)="toggleView(5)" type="button">RadialTree</button>
+                </div>
             </div>
             <div class="main-container">
                 <div *ngIf="isBarChart">
@@ -32,6 +35,10 @@
                 <div *ngIf="isLineGraph">
                     <h1>Line graph layout </h1>
                     <app-line-graph></app-line-graph>
+                </div>
+                <div *ngIf="isRadialTree">
+                    <h1>Radial Cluster layout </h1>
+                    <app-radial-tree></app-radial-tree>
                 </div>
                 
             </div>
