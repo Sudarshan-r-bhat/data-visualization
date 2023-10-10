@@ -25,6 +25,7 @@ export class MainPageComponent {
     this.isScatterPlot = (3 === viewNumber);
     this.isLineGraph = (4 === viewNumber);
     this.isRadialTree = (5 === viewNumber);
+    this.isPieChart = (6 == viewNumber)
   }
 
 
