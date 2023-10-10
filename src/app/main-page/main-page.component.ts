@@ -10,6 +10,7 @@ export class MainPageComponent {
   isTidyTree: boolean = true;
   isScatterPlot: boolean = false;
   isLineGraph: boolean = false;
+  isRadialTree: boolean = true;
   constructor() {}
 
   ngOnInit() {
@@ -21,6 +22,7 @@ export class MainPageComponent {
     this.isTidyTree = (2 === viewNumber);
     this.isScatterPlot = (3 === viewNumber);
     this.isLineGraph = (4 === viewNumber);
+    this.isRadialTree = (5 === viewNumber);
   }
 
 
