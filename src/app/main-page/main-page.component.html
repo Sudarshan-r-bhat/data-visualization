@@ -17,6 +17,9 @@
                 <div class="side-container-content">
                     <button mat-button (click)="toggleView(5)" type="button">RadialTree</button>
                 </div>
+                <div class="side-container-content">
+                    <button mat-button (click)="toggleView(6)" type="button">PieChart</button>
+                </div>
             </div>
             <div class="main-container">
                 <div *ngIf="isBarChart">
@@ -40,7 +43,10 @@
                     <h1>Radial Cluster layout </h1>
                     <app-radial-tree></app-radial-tree>
                 </div>
-                
+                <div *ngIf="isPieChart">
+                    <h1>PieChart layout </h1>
+                    <app-pie-chart></app-pie-chart>
+                </div>
             </div>
        </div>
     </body>

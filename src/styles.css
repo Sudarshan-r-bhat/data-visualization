@@ -9,6 +9,11 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+.mat-toolbar {
+    background-color: #d3b20d;
+    color: #ffffff;
+}
+
 /* side container design */
 .side-container {
     display: flex;
