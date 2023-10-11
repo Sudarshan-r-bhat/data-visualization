@@ -21,6 +21,7 @@ import { DataModule } from './data/data.module';
 import { LineGraphComponent } from './line-graph/line-graph.component';
 import { RadialTreeComponent } from './radial-tree/radial-tree.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { EdgeBundlingComponent } from './edge-bundling/edge-bundling.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
     ScatterPlotComponent,
     LineGraphComponent,
     RadialTreeComponent,
-    PieChartComponent
+    PieChartComponent,
+    EdgeBundlingComponent
   ],
   imports: [
     BrowserModule,

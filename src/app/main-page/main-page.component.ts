@@ -11,7 +11,8 @@ export class MainPageComponent {
   isScatterPlot: boolean = false;
   isLineGraph: boolean = false;
   isRadialTree: boolean = false;
-  isPieChart: boolean = true;
+  isPieChart: boolean = false;
+  isEdgeBundling: boolean = true;
 
   constructor() {}
 
@@ -25,7 +26,8 @@ export class MainPageComponent {
     this.isScatterPlot = (3 === viewNumber);
     this.isLineGraph = (4 === viewNumber);
     this.isRadialTree = (5 === viewNumber);
-    this.isPieChart = (6 == viewNumber)
+    this.isPieChart = (6 == viewNumber);
+    this.isEdgeBundling = (7 == viewNumber);
   }
 
 

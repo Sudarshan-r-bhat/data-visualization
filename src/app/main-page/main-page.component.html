@@ -20,6 +20,9 @@
                 <div class="side-container-content">
                     <button mat-button (click)="toggleView(6)" type="button">PieChart</button>
                 </div>
+                <div class="side-container-content">
+                    <button mat-button (click)="toggleView(7)" type="button">EdgeBundling</button>
+                </div>
             </div>
             <div class="main-container">
                 <div *ngIf="isBarChart">
@@ -46,6 +49,10 @@
                 <div *ngIf="isPieChart">
                     <h1>PieChart layout </h1>
                     <app-pie-chart></app-pie-chart>
+                </div>
+                <div *ngIf="isEdgeBundling">
+                    <h1>Edge bundle layout</h1>
+                    <app-edge-bundling></app-edge-bundling>
                 </div>
             </div>
        </div>
