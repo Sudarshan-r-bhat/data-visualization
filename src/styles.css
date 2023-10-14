@@ -19,13 +19,23 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 20%;
+    width: auto;
     background-color: rgba(210, 210, 201, 0.974);
     align-items: flex-start;
 }
 .side-container-content {
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex-shrink: calc();
+    flex-grow: calc();
     background: rgba(78, 72, 50, 0.813);
     margin: 10px;
+
+}
+.side-container-content.button {
+    flex-wrap: wrap;
+    flex-direction: row;
+    font-size: "2px";
 
 }
 /* End of side container design */
