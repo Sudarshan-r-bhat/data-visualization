@@ -31,29 +31,46 @@ export class TidyTreeComponent {
     const windowScreenY = this.constants.screenHieght;
     const windowScreenX = this.constants.screenWidth;
 
-    const viewBoxY = this.constants.getViewBoxHeight(hierarchy.height / 2.5);
-    const viewBoxX = this.constants.getViewBoxWidth(hierarchy.height / 2.5);
+    const viewBoxY = this.constants.getViewBoxHeight( );
+    const viewBoxX = this.constants.getViewBoxWidth();
 
     const margin = { "top": viewBoxY * 0.1, "right": 10, "bottom": 10, "left": viewBoxX * 0.05 };
-    const tree = d3.tree().size([viewBoxX, viewBoxY * 0.8]);
+    const tree = d3.tree().size([viewBoxX, viewBoxY]);
     const rootNode = tree(hierarchy);
     const links = tree(hierarchy).links();
     const descendants = rootNode.descendants();
     var linkPathGenerator = d3.linkHorizontal();
     console.log('depth', hierarchy);
 
+    const handleZoom = (event: any) => {
+      d3.select('svg g')
+        .attr('transform', event.transform)
+        ;
+    };
+    let zoom = d3.zoom()
+      .on('zoom', handleZoom);
     const treeSvg = d3.select(this.treeChart.nativeElement);
     treeSvg.attr("width", viewBoxX)
-      .attr("height", viewBoxY)
-      .style("background-color", "steelblue")
+      .attr("height", viewBoxY *4/2)
+      .style("background-color", "white")
       .style("overflow", "scroll")
+
+      ;
+    treeSvg.call(zoom);
+    treeSvg.append('text')
+      .attr('transform',`translate(0, ${viewBoxY * 0.025})`)
+      .attr('fill', 'red')
+      .text('panning/zooming is enabled, use mouse or trackpad accordingly')
+      .style('font-size', '1em')
       ;
 
-    treeSvg.selectAll("path").data(links)
+    let g = treeSvg.append('g')
+      .attr('transform', `translate(0, ${viewBoxY * 0.1})`);
+    g.selectAll("path").data(links)
       .enter().append("path")
       // .join("path")
       .attr("fill", "none")
-      .attr("stroke", "black")
+      .attr("stroke", 'steelblue') // this.constants.pathColor
       .attr("stroke-opacity", 0.6)
       .attr("stroke-width", 1.5)
       .attr("d", d => {
@@ -72,19 +89,23 @@ export class TidyTreeComponent {
       //   `);
     
     const scaleX = (d: any) => d.y + margin.left;
-    treeSvg.selectAll('circle').data(descendants).enter().append("circle")
+    g.selectAll('circle').data(descendants).enter().append("circle")
       .attr("cx", scaleX)
       .attr("cy", d => d.x)
-      .attr("r", 10)
+      .attr("r", 2 *viewBoxY/viewBoxX)
+      .attr('fill', 'red')
       .on("click", (event, d) => {
         console.log('click captured!');
       })
       ;
-    treeSvg.selectAll("text").data(descendants).enter().append("text")
+    g.selectAll("text").data(descendants).enter().append("text")
       .attr("x", scaleX)
       .attr("y", d => d.x)
       .text(d => { return (Object(d.data)) == undefined ? "n/a" : (Object(d.data)).name; })
-      .attr("fill", "white");
+      .attr('transform', `translate(${ 2 *viewBoxY/viewBoxX}, 0)`)
+      .attr("fill", "black")
+      .style('font-size', '0.2em')
+      ;
 
   }
 }

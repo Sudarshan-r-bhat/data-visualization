@@ -32,12 +32,22 @@ export class PieChartComponent {
 
     // --- calculations ---.
     // d3 layout calc
+    const handleZoom = (event: any) => {
+      d3.select('svg g')
+        .attr('tarnsform', event.transform);
+    }
+    let zoom = d3.zoom()
+      .on('zoom', handleZoom);
+
     const pieSvg = d3.select(this.pieChart.nativeElement)
                         .attr('height', viewBoxY* 1/3)
                         .attr('width', viewBoxX / 2)
                         .style('background-color', 'white');
+    // pieSvg.call(zoom);
+
     const g = pieSvg.append('g')
-      .attr('transform', `translate(${viewBoxX/4},${viewBoxY/6})`)
+      .attr('transform', `translate(${viewBoxX/4},${viewBoxY/6})`);
+
     // pie chart calc
     const pieInnerRadius = Math.min(viewBoxX, viewBoxY) / 10;
     const pieOuterRadius = Math.min(viewBoxX, viewBoxY) / 7;
@@ -67,28 +77,30 @@ export class PieChartComponent {
         .attr('x', d => arc.centroid(d)[0])
         .attr('y', d => arc.centroid(d)[1])
       .text( (d: any) => d.data.country + ": " + d.data.population)
+      .attr('font-size', `${5 * viewBoxY/viewBoxX}`);
 
     const ordinalScale: any = d3.scaleOrdinal()
             .domain(data.map((d: {country: string, population:number}) => d.country))
-            .range(d3.quantize(t => (t * 300 + 250), data.length));
+            .range(d3.quantize(t => (t *  200*viewBoxX/viewBoxY + 200*viewBoxY/viewBoxX), data.length));
             ;
     // draw Lengends
     g.selectAll('rect').data(data).enter()
       .append('rect')
-        .attr('x', (d: any) => -viewBoxX / 4 + 30)
+        .attr('x', (d: any) => -viewBoxX / 4 + 5*viewBoxX/viewBoxY)
         .attr('y', (d: any) => -viewBoxY / 4 + ordinalScale(d.country))
-        .attr('height', '25px')
-        .attr('width', '25px')
+        .attr('height', `${5 * viewBoxY/viewBoxX}`)
+        .attr('width', `${10 * viewBoxY/viewBoxX}`)
         .attr('fill', (d: any) => color(d.country))
         ;
     const g2 = pieSvg.append('g')
     .attr('transform', `translate(${viewBoxX/4},${viewBoxY/6})`);
     g2.selectAll('text').data(data).enter()
       .append('text')
-        .attr('x',(d: any) => -viewBoxX / 4 + 60)
-        .attr('y',(d: any) => -viewBoxY / 4 + ordinalScale(d.country) + 25)
+      .attr('x', (d: any) => -viewBoxX / 4 + 25*viewBoxX/viewBoxY)
+      .attr('y', (d: any) => -viewBoxY / 4 + 5 *viewBoxY/viewBoxX + ordinalScale(d.country))
       .text( (d: any) => d.country + "= " + d.population)
         .attr('fill', 'black')
+        .attr('font-size', `${10 * viewBoxY/viewBoxX}`)
       ;
   }
 
