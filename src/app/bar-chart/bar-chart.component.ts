@@ -33,9 +33,9 @@ export class BarChartComponent {
     var barChart = this.barChart.nativeElement;
     const barChartSvg = d3
       .select(barChart)
-      .attr("height", `${viewBoxY}`)
-      .attr("width", `${viewBoxX}`)
-      .attr("viewbox", `0 0 ${viewBoxX} ${viewBoxY}`)  // syntax: 
+      .attr("height", `${viewBoxY* 2/3}`)
+      .attr("width", `${viewBoxX *2/3}`)
+      .attr("viewbox", `0 0 ${viewBoxX*2/3 } ${viewBoxY *2/3}`)  // syntax: 
       .style("background-color", "orange")
       ;
     // scaleLinear, this function generates ranges for the given min and max
@@ -44,14 +44,14 @@ export class BarChartComponent {
     const scaleLinear = d3.scaleLinear;
     const scaleX = scaleLinear()
       .domain([min, max])
-      .range([0, viewBoxX * 0.8]);
+      .range([0, viewBoxX/2 * 0.8]);
 
     // scaleBand helps you choose the  band for a given height / size
     // refer: https://www.w3schools.com/graphics/tryit.asp?filename=trysvg_rect2
     // https://www.w3schools.com/graphics/svg_rect.asp
     const scaleY = d3.scaleBand()
       .domain(barChartData.map(d => d.country))
-      .range([0, viewBoxY * 0.8])
+      .range([0, viewBoxY/2 * 0.8])
       .padding(0.1)
       ;
 
@@ -63,9 +63,9 @@ export class BarChartComponent {
     yAxis(group2.append("g"));
 
     const xAxis = d3.axisBottom(scaleX)
-      .tickSize(-viewBoxY * 0.8);
+      .tickSize(-viewBoxY/2 * 0.8);
     const xAxisGroup = group2.append("g");
-    xAxisGroup.attr("transform", `translate(0, ${viewBoxY * 0.8})`);
+    xAxisGroup.attr("transform", `translate(0, ${viewBoxY/2 * 0.8})`);
     xAxis(xAxisGroup);
 
     group2.selectAll('rect').data(barChartData)

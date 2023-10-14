@@ -30,7 +30,7 @@ export class RadialTreeComponent implements OnInit {
 
     const margin = { "top": viewBoxY * 0.1, "right": 10, "bottom": 10, "left": viewBoxX * 0.1 };
 
-    const clusterLayout = d3.cluster().size([2 * Math.PI, viewBoxY* 0.8])   // set the co-ordinate system size x ranges form 0 to 2*pi, y ranges from 0 to viewBoxY/2
+    const clusterLayout = d3.cluster().size([2 * Math.PI, viewBoxY* 0.4])   // set the co-ordinate system size x ranges form 0 to 2*pi, y ranges from 0 to viewBoxY/2
       .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth);      // set separation b/w nodes wrt depth
 
     const rootNode = clusterLayout(hierarchy);
@@ -40,22 +40,30 @@ export class RadialTreeComponent implements OnInit {
     const radialPathGenerator = d3.linkRadial<any, any>()
     .radius((d) => d.y)
     .angle((d) => d.x);
-    
-    const treeSvg = d3.select(this.radialTreeElement.nativeElement);
-    treeSvg.attr("width", windowScreenX)
-      .attr("height", windowScreenY * 2);
 
+    const handleZoom = (event: any) => {
+      d3.select('svg g')
+        .attr('transform', event.transform)
+        ;
+    };
+    let zoom = d3.zoom()
+      .on('zoom', handleZoom);
+
+    const treeSvg = d3.select(this.radialTreeElement.nativeElement);
+    treeSvg.attr("width", windowScreenX * 0.8)
+      .attr("height", windowScreenY);
+    treeSvg.call(zoom);
     // move entire group 
     const group = treeSvg.append('g')
-      .attr('transform', `translate(${viewBoxX* 0.7},${viewBoxY })`)
+      .attr('transform', `translate(${viewBoxX* 0.5},${viewBoxY /2 })`)
     
     // draw path
     group.selectAll('path').data(links).enter()
     .append('path')
       .attr('d', radialPathGenerator)
       .attr("fill", "none")
-      .attr('stroke', 'rgba(37, 27, 32, 0.53)')
-      .attr('stroke-width', 3)
+      .attr('stroke', 'steelblue')
+      .attr('stroke-width', viewBoxX/viewBoxY)
     ;
 
     // (x, y) from polar system
@@ -70,8 +78,8 @@ export class RadialTreeComponent implements OnInit {
       .append('circle')
         .attr('cx', scaleX)
         .attr('cy', scaleY)
-        .attr('r', 5)
-        .attr('fill', 'steelblue');
+        .attr('r', 3 * viewBoxY/viewBoxX)
+        .attr('fill', 'red');
         
     nodes.merge(nodes)
       .on('click', d => {
@@ -147,7 +155,7 @@ export class RadialTreeComponent implements OnInit {
       .attr("text-anchor",(d: any) => getTextAnchor(d.x, -1))
       .attr('transform', d => `rotate(${getTextAngle(d.x, d.y)}, ${scaleX(d)},${scaleY(d)}) `) // rotate(angle,x,y) 
       .attr('fill', 'black')
-      .style("font-size", "0.7em")
+      .style("font-size", "0.3em")
       ;
 
   }
