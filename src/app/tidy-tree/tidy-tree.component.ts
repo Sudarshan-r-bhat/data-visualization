@@ -58,12 +58,11 @@ export class TidyTreeComponent {
       ;
     treeSvg.call(zoom);
     treeSvg.append('text')
-      .attr('transform',`translate(0, ${viewBoxY * 0.025})`)
-      .attr('fill', 'red')
-      .text('panning/zooming is enabled, use mouse or trackpad accordingly')
-      .style('font-size', '1em')
-      ;
-
+    .attr('transform',`translate(0, ${viewBoxY * 0.08})`)
+    .attr('fill', 'red')
+    .text('panning/zooming is enabled, use mouse or trackpad accordingly')
+    .style('font-size', '1em')
+    ;
     let g = treeSvg.append('g')
       .attr('transform', `translate(0, ${viewBoxY * 0.1})`);
     g.selectAll("path").data(links)

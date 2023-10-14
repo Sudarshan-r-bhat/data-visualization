@@ -26,15 +26,15 @@ export class PieChartComponent {
     const windowScreenX = this.constants.screenWidth;
 
     const viewBoxY = this.constants.getViewBoxHeight(2);
-    const viewBoxX = this.constants.getViewBoxWidth(1.5);
+    const viewBoxX = this.constants.getViewBoxWidth(1.2);
 
     const margin = { "top": viewBoxY * 0.1, "right": 10, "bottom": 10, "left": viewBoxX * 0.05 };
 
     // --- calculations ---.
     // d3 layout calc
     const handleZoom = (event: any) => {
-      d3.select('svg g')
-        .attr('tarnsform', event.transform);
+      d3.selectAll('svg g')
+        .attr('transform', event.transform);
     }
     let zoom = d3.zoom()
       .on('zoom', handleZoom);
@@ -43,7 +43,7 @@ export class PieChartComponent {
                         .attr('height', viewBoxY* 1/3)
                         .attr('width', viewBoxX / 2)
                         .style('background-color', 'white');
-    // pieSvg.call(zoom);
+    pieSvg.call(zoom);
 
     const g = pieSvg.append('g')
       .attr('transform', `translate(${viewBoxX/4},${viewBoxY/6})`);
@@ -52,8 +52,8 @@ export class PieChartComponent {
     const pieInnerRadius = Math.min(viewBoxX, viewBoxY) / 10;
     const pieOuterRadius = Math.min(viewBoxX, viewBoxY) / 7;
     const arc: any = d3.arc()
-      .innerRadius(pieInnerRadius)
-      .outerRadius(pieOuterRadius)
+      .innerRadius(Math.min(viewBoxX, viewBoxY) / 10)
+      .outerRadius(Math.min(viewBoxX, viewBoxY) / 7)
       ;
     const pie = d3.pie().sortValues(null)
       .padAngle(2*Math.PI/180) // 2deg
@@ -81,7 +81,7 @@ export class PieChartComponent {
 
     const ordinalScale: any = d3.scaleOrdinal()
             .domain(data.map((d: {country: string, population:number}) => d.country))
-            .range(d3.quantize(t => (t *  200*viewBoxX/viewBoxY + 200*viewBoxY/viewBoxX), data.length));
+            .range(d3.quantize(t => (t *  200*viewBoxY/viewBoxX + 200*viewBoxY/viewBoxX), data.length));
             ;
     // draw Lengends
     g.selectAll('rect').data(data).enter()
